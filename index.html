@@ -41,7 +41,7 @@ for(let i=0;i<22;i++)bub.push({x:Math.random()*W,y:Math.random()*H,r:1+Math.rand
 function reset(){d={y:H/2-30,v:0,a:0,auto:false};nets=[];made=0;score=0;t=0;addNet(W+60);addNet(W+60+200)}
 function addNet(px){made++;nets.push({x:px,gy:90+Math.random()*(FLOOR-GAP-150)+40,ok:false,pinger:made>3&&Math.random()<.25})}
 function flap(){
-  if(st==='ready'){reset();st='play'}
+  if(st==='ready'){reset();st='play';if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'partida',title:'Partida iniciada',event:true})}
   if(st==='play'){if(!d.auto)d.v=JUMP}
   else if(st==='over'&&t>25){st='ready';reset()}
 }
@@ -155,5 +155,6 @@ function render(){
 }
 (function loop(){update();render();requestAnimationFrame(loop)})();
 </script>
+<script data-goatcounter="https://franciscana.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>  
 </body>
 </html>
