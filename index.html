@@ -6,11 +6,11 @@
 <title>Franciscana</title>
 <style>
 :root{--bg:#1d2a24;--ink:#e9efe3;--mute:#9fb3a5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 #wrap{position:relative;height:min(100%,calc(100vw*1.5556));aspect-ratio:9/14;max-height:100%}
-canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}}
+canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:none;outline:none}}
 p{margin:0;font-size:13px;color:var(--mute);text-align:center;padding:0 12px}
 </style>
 </head>
@@ -32,6 +32,8 @@ function flap(){
 }
 addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();flap()}});
 cv.addEventListener('pointerdown',e=>{e.preventDefault();flap()});
+cv.addEventListener('touchstart',e=>e.preventDefault(),{passive:false});
+cv.addEventListener('contextmenu',e=>e.preventDefault());
 reset();
 
 function update(){
