@@ -9,14 +9,29 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
-#wrap{position:relative;height:min(100%,calc(100vw*1.5556));aspect-ratio:9/14;max-height:100%}
+#wrap{position:relative;height:min(calc(100% - 120px),calc(100vw*1.5556));aspect-ratio:9/14;max-height:100%}
 canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer canvas{width:100%;height:100%;display:block;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:none;outline:none}}
 p{margin:0;font-size:13px;color:var(--mute);text-align:center;padding:0 12px}
+footer{display:flex;align-items:center;gap:12px;max-width:360px;padding:0 12px}
+footer img{height:44px;width:auto;flex-shrink:0}
+footer p{text-align:left;padding:0}
+footer nav{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}
+footer a{color:var(--ink);font-size:13px;text-decoration:underline}
 </style>
 </head>
 <body>
 <div id="wrap"><canvas id="c" width="360" height="560" aria-label="Juego de la franciscana"></canvas></div>
 <p>Tocá, clic o barra espaciadora para nadar hacia arriba. Esquivá las redes.</p>
+<footer>
+  <img src="logo.png" alt="Logo de AQM">
+  <div>
+    <p>Para más info sobre cómo proteger al delfín franciscana encontranos en:</p>
+    <nav>
+      <a href="https://www.instagram.com/aquamarina_ong" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://aquamarina.org/" target="_blank" rel="noopener">WEB</a>
+    </nav>
+  </div>
+</footer>
 <script>
 const cv=document.getElementById('c'),x=cv.getContext('2d'),W=360,H=560;
 const GAP=150,NW=54,SPD=2.1,G=0.34,JUMP=-5.6,FLOOR=H-48;
