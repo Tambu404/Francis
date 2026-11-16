@@ -29,7 +29,7 @@ footer a{color:var(--ink);font-size:13px;text-decoration:underline}
     <p>Para más info sobre cómo proteger al delfín franciscana encontranos en:</p>
     <nav>
       <a href="https://aquamarina.org/" target="_blank" rel="noopener">Aquamarina.org</a>
-      <a href="https://www.instagram.com/aquamarina_ong" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/aquamarina_org" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </div>
 </footer>
@@ -40,6 +40,7 @@ let made=0,st='ready',d,nets,score,best=0,t=0,bub=[],shake=0;
   let games=0;
 function track(p,ti){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:p,title:ti,event:true})}catch(e){}}
 addEventListener('load',()=>{try{if(localStorage.getItem('fr-visited'))track('visitante-recurrente','Volvió a abrir el juego');else localStorage.setItem('fr-visited','1')}catch(e){}});
+  document.querySelectorAll('footer a').forEach(a=>a.addEventListener('click',()=>track('click-'+a.textContent.trim().toLowerCase().replace(/\W+/g,'-'),'Clic en '+a.textContent.trim())));
 try{best=+localStorage.getItem('fr-best')||0}catch(e){}
 for(let i=0;i<22;i++)bub.push({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*3,s:.2+Math.random()*.5});
 function reset(){d={y:H/2-30,v:0,a:0,auto:false};nets=[];made=0;score=0;t=0;addNet(W+60);addNet(W+60+200)}
