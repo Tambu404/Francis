@@ -17,7 +17,7 @@ footer img{height:72px;width:auto;flex-shrink:0}
 footer p{text-align:left;padding:0}
 footer nav{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}
 footer a{color:var(--ink);font-size:13px;text-decoration:underline}
-#donate{position:absolute;left:20%;width:60%;top:58.9%;height:7.5%;display:none;align-items:center;justify-content:center;background:#f2c230;color:#2a2410;font-weight:bold;font-size:17px;text-decoration:none;border-radius:10px;z-index:2}
+#donate{position:absolute;left:20%;width:60%;top:58.9%;height:7.5%;display:none;align-items:center;justify-content:center;background:#f2c230;color:#2a2410;font-weight:bold;font-size:18px;text-decoration:none;border-radius:10px;z-index:2}
 </style>
 </head>
 <body>
@@ -37,12 +37,15 @@ footer a{color:var(--ink);font-size:13px;text-decoration:underline}
 const cv=document.getElementById('c'),x=cv.getContext('2d'),W=360,H=560;
 const GAP=150,NW=54,SPD=2.1,G=0.34,JUMP=-5.6,FLOOR=H-48;
 let made=0,st='ready',d,nets,score,best=0,t=0,bub=[],shake=0;
+  let games=0;
+function track(p,ti){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:p,title:ti,event:true})}catch(e){}}
+addEventListener('load',()=>{try{if(localStorage.getItem('fr-visited'))track('visitante-recurrente','Volvió a abrir el juego');else localStorage.setItem('fr-visited','1')}catch(e){}});
 try{best=+localStorage.getItem('fr-best')||0}catch(e){}
 for(let i=0;i<22;i++)bub.push({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*3,s:.2+Math.random()*.5});
 function reset(){d={y:H/2-30,v:0,a:0,auto:false};nets=[];made=0;score=0;t=0;addNet(W+60);addNet(W+60+200)}
 function addNet(px){made++;nets.push({x:px,gy:90+Math.random()*(FLOOR-GAP-150)+40,ok:false,pinger:made>3&&Math.random()<.25})}
 function flap(){
-  if(st==='ready'){reset();st='play';if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'partida',title:'Partida iniciada',event:true})}
+ if(st==='ready'){reset();st='play';track('partida','Partida iniciada');if(games>0)track('partida-repetida','Volvió a jugar');games++}
   if(st==='play'){if(!d.auto)d.v=JUMP}
   else if(st==='over'&&t>25){st='ready';reset()}
 }
@@ -68,7 +71,7 @@ function update(){
   if(nets[0].x<-NW-10){nets.shift();addNet(nets[nets.length-1].x+200)}
   if(d.y+10>FLOOR||d.y<-20)die();
 }
-function die(){if(st!=='play')return;st='over';t=0;shake=8;
+function die(){if(st!=='play')return;st='over';t=0;shake=8;track('puntaje-'+String(score).padStart(3,'0'),'Puntaje al perder');
   if(score>best){best=score;try{localStorage.setItem('fr-best',best)}catch(e){}}}
 
 function water(){
