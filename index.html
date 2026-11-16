@@ -17,10 +17,11 @@ footer img{height:72px;width:auto;flex-shrink:0}
 footer p{text-align:left;padding:0}
 footer nav{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}
 footer a{color:var(--ink);font-size:13px;text-decoration:underline}
+#donate{position:absolute;left:11.1%;width:77.8%;top:62.9%;height:7.5%;display:none;align-items:center;justify-content:center;background:#e8662a;color:#fff;font-weight:bold;font-size:14px;text-decoration:none;border-radius:10px;z-index:2}
 </style>
 </head>
 <body>
-<div id="wrap"><canvas id="c" width="360" height="560" aria-label="Juego de la franciscana"></canvas></div>
+<div id="wrap"><a id="donate" onclick="window.goatcounter&&goatcounter.count&&goatcounter.count({path:'donar',title:'Clic en donar',event:true})" href="https://donaronline.org/aquamarina/por-el-delfin-franciscana" target="_blank" rel="noopener">Quiero ayudarlos</a><canvas id="c" width="360" height="560" aria-label="Juego de la franciscana"></canvas></div>
 <p>Tocá para nadar hacia arriba y esquivar las redes.</p>
 <footer>
   <img src="Logo.png" alt="Logo de AQM">
@@ -140,9 +141,10 @@ function dolphin(){
   x.restore();
 }
 function text(s,y,sz,col,al){x.font=`bold ${sz}px "Trebuchet MS","Segoe UI",sans-serif`;x.textAlign=al||'center';x.fillStyle=col||'#f2f0dc';x.fillText(s,W/2,y)}
-function panel(lines){
-  x.fillStyle='rgba(25,32,22,.72)';x.beginPath();x.roundRect(40,190,W-80,170,16);x.fill();
+function panel(lines,y,h){
+  x.fillStyle='rgba(25,32,22,.72)';x.beginPath();x.roundRect(40,y||190,W-80,h||170,16);x.fill();
   lines.forEach(l=>text(l[0],l[1],l[2],l[3]));
+}
 }
 function render(){
   x.save();
@@ -151,7 +153,8 @@ function render(){
   x.restore();
   if(st!=='ready')text(score,70,46);
   if(st==='ready')panel([['Franciscana',238,32],['Pontoporia blainvillei',262,14,'#c9d3b8'],['Tocá para empezar',312,18],['Mejor: '+best,340,14,'#c9d3b8']]);
-  if(st==='over')panel([['Quedó en la red',232,26],['Puntos: '+score,272,22],['Mejor: '+best,298,16,'#c9d3b8'],['Tocá para reintentar',340,16]]);
+  if(st==='over')panel([['Quedó en la red',200,26],['Puntos: '+score,238,22],['Mejor: '+best,262,16,'#c9d3b8'],['Tocá para reintentar',296,16],['Ayudanos a protegerlos',336,14,'#c9d3b8']],160,250);
+document.getElementById('donate').style.display=st==='over'?'flex':'none';
 }
 (function loop(){update();render();requestAnimationFrame(loop)})();
 </script>
